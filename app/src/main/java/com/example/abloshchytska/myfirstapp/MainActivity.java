@@ -10,10 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    public static Bitmap croppedImage;
 
     private final int REQUEST_IMAGE_CAPTURE = 1;
     private final int REQUEST_IMAGE_CROP = 2;
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnCrop.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 performImageCrop(imageCaptureUri);
             }
         });
@@ -68,21 +71,14 @@ public class MainActivity extends AppCompatActivity {
             } else if(requestCode == REQUEST_IMAGE_CROP){
                 //get the returned data
                 Bundle extras = data.getExtras();
-                Bitmap thePic = extras.getParcelable("data");
-                imageHolder.setImageBitmap(thePic);
+                croppedImage = extras.getParcelable("data");
+                showResultMessage();
             }
 
         } else if (resultCode == Activity.RESULT_CANCELED) {
             imageHolder.setBackgroundColor(0xff444444);
         }
     }
-
-    /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
-
-    public native String stringFromJNI();
-     */
 
     private void performImageCrop(Uri picUri){
         try {
@@ -107,5 +103,10 @@ public class MainActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT);
             toast.show();
         }
+    }
+
+    public void showResultMessage() {
+        Intent intent = new Intent(this, DisplayResultMessageActivity.class);
+        startActivity(intent);
     }
 }

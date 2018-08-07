@@ -2,5 +2,6 @@
     <string name="app_name">ScandiToKnow</string>
     <string name="start_button_name">Aufnehmen</string>
     <string name="crop_button_name">Bildausschnitt erstellen</string>
-    <string name="description_start_image">Caputred image</string>
+    <string name="description_start_image">Captured image</string>
+    <string name="story_for_image">Blablabla</string>
 </resources>
