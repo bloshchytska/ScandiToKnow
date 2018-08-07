@@ -15,12 +15,12 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     private final int REQUEST_IMAGE_CAPTURE = 1;
     private final int REQUEST_IMAGE_CROP = 2;
 
     private ImageView imageHolder;
     private Uri imageCaptureUri;
+    private Button btnCrop;
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -33,17 +33,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button btnCamera = findViewById(R.id.btnCamera);
+        btnCrop = findViewById(R.id.btnCrop);
+
         imageHolder = findViewById(R.id.imgView);
 
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                String message = "Capture Image";
-
-                imageHolder.setBackgroundColor(0xff000000);
-                intent.putExtra(EXTRA_MESSAGE, message);
                 startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+            }
+        });
+
+        btnCrop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performImageCrop(imageCaptureUri);
             }
         });
     }
@@ -54,24 +59,16 @@ public class MainActivity extends AppCompatActivity {
 
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
-                this.imageCaptureUri = data.getData();
-                //carry out the crop operation
-                performImageCrop(this.imageCaptureUri );
-                /*Bundle extras = data.getExtras();
-                Bitmap imageBitmap = (Bitmap)extras.get("data");
-                imageHolder.setBackgroundColor(0x00000000);
-                imageHolder.setImageBitmap(imageBitmap);*/
-            }
+                imageCaptureUri = data.getData();
 
-            //user is returning from cropping the image
-            else if(requestCode == REQUEST_IMAGE_CROP){
+                if (this.imageCaptureUri != null) {
+                    this.btnCrop.setVisibility(View.VISIBLE);
+                }
+
+            } else if(requestCode == REQUEST_IMAGE_CROP){
                 //get the returned data
                 Bundle extras = data.getExtras();
-                //get the cropped bitmap
                 Bitmap thePic = extras.getParcelable("data");
-                //retrieve a reference to the ImageView
-                //ImageView picView = (ImageView)findViewById(R.id.picture);
-                //display the returned cropped image
                 imageHolder.setImageBitmap(thePic);
             }
 

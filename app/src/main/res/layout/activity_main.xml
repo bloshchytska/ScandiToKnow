@@ -4,43 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="?android:attr/colorPrimaryDark"
     android:drawingCacheQuality="high"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-
-    <ImageView
-        android:id="@+id/imgView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="9"
-        android:paddingBottom="5dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="5dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="64dp" />
 
     <Button
         android:id="@+id/btnCamera"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_weight="1"
-        android:text="Open Camera"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorAccent"
+        android:text="@string/start_button_name"
+        android:textColor="@color/colorPrimaryDark"
+        android:typeface="sans"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.465"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnCrop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:background="#fdfdfd"
+        android:baselineAligned="false"
+        android:text="@string/crop_button_name"
+        android:textColor="@color/colorPrimaryDark"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="0dp"
+        android:contentDescription="@string/description_start_image"
+        android:drawingCacheQuality="high"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="64dp" />
 
 </LinearLayout>
