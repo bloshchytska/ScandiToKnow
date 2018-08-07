@@ -2,9 +2,6 @@
 
 ...
 
-## Deployment
-
-
 ## Built With
 
 * [Android Studio 3.1.4](https://developer.android.com/)
