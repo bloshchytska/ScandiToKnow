@@ -13,7 +13,8 @@
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+* All artworks (illustrations) are licensed under the [Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 License](https://creativecommons.org/licenses/by-nc-nd/3.0/)
+* The project code is licensed under the [MIT License](https://opensource.org/licenses/MIT)
 
 ## Acknowledgments
 
