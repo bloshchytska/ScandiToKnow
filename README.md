@@ -8,8 +8,8 @@
 
 ## Authors
 
-* **Polina Panchenkova** - *Project Idea, Illustration, Content* - [instagram](https://www.instagram.com/polina_panchenkova/)
-* **Anastasiia Bloshchytska** - *Development, UX/UI* - [github](https://github.com/bloshchytska)
+* **Polina Panchenkova** - *Project Idea, Illustration, Icon/UI Design, Content* - [instagram](https://www.instagram.com/polina_panchenkova/)
+* **Anastasiia Bloshchytska** - *App Idea, Development, UX/UI* - [github](https://github.com/bloshchytska)
 
 ## License
 
