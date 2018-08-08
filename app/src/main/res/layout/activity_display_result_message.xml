@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorPrimaryLight"
     tools:context=".DisplayResultMessageActivity">
 
     <ImageView
@@ -31,8 +31,11 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
+        android:lineSpacingExtra="12sp"
         android:text="@string/story_for_image"
-        android:textColor="@android:color/background_light"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="20sp"
+        app:fontFamily="@font/abel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageResultView" />
@@ -47,7 +50,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="18dp"
         android:text="@string/error_for_image"
-        android:textColor="@android:color/holo_red_light"
+        android:textColor="@color/colorRedAccent"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,10 +66,10 @@
         android:layout_marginRight="28dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorYellowAccent"
         android:baselineAligned="false"
         android:text="@string/crop_button_name"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimaryLight"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
