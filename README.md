@@ -1,12 +1,12 @@
 # ScandiToKnow
-
-...
-## Story
 Art and Multimedia Project at LMU Munich
+
+## Story
+...
 
 ## Authors
 
-* **Polina Panchenkova** - *Project Idea, Illustration, Icon/UI Design, Content* - [instagram](https://www.instagram.com/polina_panchenkova/)
+* **Polina Panchenkova** - *Project Idea, Story, Illustration, Icon Design, Content* - [instagram](https://www.instagram.com/polina_panchenkova/)
 * **Anastasiia Bloshchytska** - *App Idea, Development, UX/UI Design* - [github](https://github.com/bloshchytska)
 
 
