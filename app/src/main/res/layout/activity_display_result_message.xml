@@ -4,7 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context=".DisplayResultMessageActivity">
+
+    <ImageView
+        android:id="@+id/imageResultView"
+        android:layout_width="243dp"
+        android:layout_height="261dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_background" />
 
     <TextView
         android:id="@+id/textResultView"
@@ -16,21 +32,46 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:text="@string/story_for_image"
+        android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageResultView" />
 
-    <ImageView
-        android:id="@+id/imageResultView"
-        android:layout_width="243dp"
-        android:layout_height="352dp"
+    <TextView
+        android:id="@+id/textViewError"
+        android:layout_width="248dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="18dp"
+        android:text="@string/error_for_image"
+        android:textColor="@android:color/holo_red_light"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:layout_constraintTop_toBottomOf="@+id/imageResultView" />
+
+    <Button
+        android:id="@+id/btnCrop"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorAccent"
+        android:baselineAligned="false"
+        android:text="@string/crop_button_name"
+        android:textColor="@color/colorPrimaryDark"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewError"
+        app:layout_constraintVertical_bias="0.95" />
 </android.support.constraint.ConstraintLayout>

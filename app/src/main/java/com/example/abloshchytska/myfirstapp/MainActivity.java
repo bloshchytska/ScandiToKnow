@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -17,13 +18,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     public static Bitmap croppedImage;
+    public static Uri imageCaptureUri;
 
+    public static final int REQUEST_IMAGE_CROP = 2;
     private final int REQUEST_IMAGE_CAPTURE = 1;
-    private final int REQUEST_IMAGE_CROP = 2;
 
-    private ImageView imageHolder;
-    private Uri imageCaptureUri;
-    private Button btnCrop;
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -36,22 +35,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button btnCamera = findViewById(R.id.btnCamera);
-        btnCrop = findViewById(R.id.btnCrop);
-
-        imageHolder = findViewById(R.id.imgView);
 
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-            }
-        });
-
-        btnCrop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                performImageCrop(imageCaptureUri);
             }
         });
     }
@@ -61,40 +50,31 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == Activity.RESULT_OK) {
+
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
                 imageCaptureUri = data.getData();
-
-                if (this.imageCaptureUri != null) {
-                    this.btnCrop.setVisibility(View.VISIBLE);
-                }
+                performImageCrop(imageCaptureUri);
 
             } else if(requestCode == REQUEST_IMAGE_CROP){
-                //get the returned data
                 Bundle extras = data.getExtras();
                 croppedImage = extras.getParcelable("data");
                 showResultMessage();
             }
 
         } else if (resultCode == Activity.RESULT_CANCELED) {
-            imageHolder.setBackgroundColor(0xff444444);
+            // TODO: error messange
         }
     }
 
-    private void performImageCrop(Uri picUri){
+    public void performImageCrop(Uri picUri){
         try {
-            //call the standard crop action intent (the user device may not support it)
             Intent cropIntent = new Intent("com.android.camera.action.CROP");
-            //indicate image type and Uri
             cropIntent.setDataAndType(picUri, "image/*");
-            //set crop properties
             cropIntent.putExtra("crop", "true");
-            //indicate output X and Y
             cropIntent.putExtra("outputX", 256);
-            cropIntent.putExtra("outputY", 256);
+            cropIntent.putExtra("outputY", 156);
             cropIntent.putExtra("scale", true);
-            //retrieve data on return
             cropIntent.putExtra("return-data", true);
-            //start the activity - we handle returning in onActivityResult
             startActivityForResult(cropIntent, REQUEST_IMAGE_CROP);
         }
         catch(ActivityNotFoundException anfe){

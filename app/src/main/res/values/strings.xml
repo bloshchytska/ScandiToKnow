@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">ScandiToKnow</string>
     <string name="start_button_name">Aufnehmen</string>
-    <string name="crop_button_name">Bildausschnitt erstellen</string>
-    <string name="description_start_image">Captured image</string>
+    <string name="crop_button_name">Bildausschnitt neu erstellen</string>
     <string name="story_for_image">Blablabla</string>
+    <string name="error_for_image">Die Geschichte für dieses Bild wurde nicht gefunden. Versuche erneuert! </string>
+    <string name="start_description_1">1. Nehme ein Skandi-Bild auf</string>
+    <string name="start_description_2">2. Erstelle ein Bildausschnitt, um Skandi-Motiv besser zu erkennen</string>
+    <string name="start_description_3">3. Lies die Geschichte!</string>
 </resources>
