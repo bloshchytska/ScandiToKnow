@@ -8,6 +8,8 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class TestHashingImages extends AppCompatActivity {
 
@@ -22,6 +24,7 @@ public class TestHashingImages extends AppCompatActivity {
 
         ImageView imageViewLeft = findViewById(R.id.imageView1);
         imageViewLeft.setImageBitmap(imageFromFile1);
+
         ImageView imageViewRight = findViewById(R.id.imageView2);
         imageViewRight.setImageBitmap(imageFromFile2);
 
@@ -32,17 +35,22 @@ public class TestHashingImages extends AppCompatActivity {
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
 
 
-         imageFromFile1 = BitmapFactory.decodeFile("file:///assets/1_img.png", options);
-         imageFromFile2 = BitmapFactory.decodeFile("file:///assets/2_img.png", options);
-         imageFromFile3 = BitmapFactory.decodeFile("file:///assets/3_img.png", options);
-         imageFromFile4 = BitmapFactory.decodeFile("file:///assets/4_img.png", options);
+        InputStream bitmap1 = null;
+        InputStream bitmap2 = null;
 
+        try {
+            bitmap1 = getAssets().open("img1.png");
+            bitmap2 = getAssets().open("img2.png");
+            imageFromFile1 = BitmapFactory.decodeStream(bitmap1);
+            imageFromFile2 = BitmapFactory.decodeStream(bitmap2);
 
-        if (imageFromFile1 == null) {
-            Log.d("Image null", "...................");
-        } else {
-            Log.d("", "...................");
+        } catch (IOException e) {
+            e.printStackTrace();
 
+        } finally {
+            if(bitmap1 != null || bitmap2 != null) {
+               Log.e("error", "error");
+            }
         }
     }
 }
