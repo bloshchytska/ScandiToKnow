@@ -21,11 +21,13 @@ public class DisplayResultMessageActivity extends AppCompatActivity {
     private  Button btnCrop;
     private TextView textView;
     private TextView textViewError;
+    boolean[] message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_result_message);
+
 
         imageHolder = findViewById(R.id.imageResultView);
         croppedImage = MainActivity.croppedImage;
@@ -63,6 +65,9 @@ public class DisplayResultMessageActivity extends AppCompatActivity {
         }
     }
 
+
+
+
     public void performImageCrop(Uri picUri){
         try {
             Intent cropIntent = new Intent("com.android.camera.action.CROP");
@@ -82,17 +87,16 @@ public class DisplayResultMessageActivity extends AppCompatActivity {
         }
     }
 
+
+
+
     private boolean checkImageInDB(Bitmap bitmap) {
-        // find and return new image on View
-        // find and return text for this image on View
-
-        if (bitmap != null) {
-        } else {
-            //TODO: Error message
-        }
-
         return true;
     }
+
+
+
+
 
     private void showResultMessage() {
         imageHolder.setImageBitmap(croppedImage);

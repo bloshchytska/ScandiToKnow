@@ -3,18 +3,18 @@ package com.example.abloshchytska.myfirstapp;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
+
 
 public class MainActivity extends AppCompatActivity {
     public static Bitmap croppedImage;
@@ -24,10 +24,14 @@ public class MainActivity extends AppCompatActivity {
     private final int REQUEST_IMAGE_CAPTURE = 1;
 
 
+
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
     }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +39,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button btnCamera = findViewById(R.id.btnCamera);
+        Button btnTest = findViewById(R.id.btnTest);
 
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+            }
+        });
+
+        btnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showTestView();
             }
         });
     }
@@ -66,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+
     public void performImageCrop(Uri picUri){
         try {
             Intent cropIntent = new Intent("com.android.camera.action.CROP");
@@ -83,6 +97,13 @@ public class MainActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT);
             toast.show();
         }
+    }
+
+
+
+    public void showTestView() {
+        Intent intent = new Intent(this, TestHashingImages.class);
+        startActivity(intent);
     }
 
     public void showResultMessage() {

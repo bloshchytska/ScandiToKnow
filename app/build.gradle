@@ -29,6 +29,8 @@ android {
 }
 
 dependencies {
+    compile group: 'info.debatty', name: 'java-lsh', version: '0.10'
+    compile 'org.tensorflow:tensorflow-android:+'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0-alpha3'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
