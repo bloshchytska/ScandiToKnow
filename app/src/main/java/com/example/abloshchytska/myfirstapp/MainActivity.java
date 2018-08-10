@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button btnCamera = findViewById(R.id.btnCamera);
-        Button btnTest = findViewById(R.id.btnTest);
 
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,12 +48,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showTestView();
-            }
-        });
     }
 
     @Override
@@ -70,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             } else if(requestCode == REQUEST_IMAGE_CROP){
                 Bundle extras = data.getExtras();
                 croppedImage = extras.getParcelable("data");
-                showResultMessage();
+                showTestView();
             }
 
         } else if (resultCode == Activity.RESULT_CANCELED) {
@@ -85,14 +78,16 @@ public class MainActivity extends AppCompatActivity {
             Intent cropIntent = new Intent("com.android.camera.action.CROP");
             cropIntent.setDataAndType(picUri, "image/*");
             cropIntent.putExtra("crop", "true");
+            //indicate aspect of desired crop
+            cropIntent.putExtra("aspectX", 1);
+            cropIntent.putExtra("aspectY", 1);
             cropIntent.putExtra("outputX", 256);
-            cropIntent.putExtra("outputY", 156);
+            cropIntent.putExtra("outputY", 256);
             cropIntent.putExtra("scale", true);
             cropIntent.putExtra("return-data", true);
             startActivityForResult(cropIntent, REQUEST_IMAGE_CROP);
-        }
-        catch(ActivityNotFoundException anfe){
-            //display an error message
+
+        } catch(ActivityNotFoundException anfe){
             String errorMessage = "Whoops - your device doesn't support the crop action!";
             Toast toast = Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT);
             toast.show();
