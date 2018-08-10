@@ -60,12 +60,14 @@ public class TestHashingImages extends AppCompatActivity {
 
             int distance1 = hammingDistance(v1, v2);
             int distance2 = hammingDistance(v1, v3);
+            double distance11 = cartesianDistance(v1, v2);
+            double distance22 = cartesianDistance(v1, v3);
 
             TextView textView1 = findViewById(R.id.textDistance1);
-            textView1.setText(Integer.toString(distance1));
+            textView1.setText(Double.toString(distance11));
 
             TextView textView2 = findViewById(R.id.textDistance2);
-            textView2.setText(Integer.toString(distance2));
+            textView2.setText(Double.toString(distance22));
         }
     }
 
@@ -195,6 +197,24 @@ public class TestHashingImages extends AppCompatActivity {
 
         return distance;
     }
+
+    /**
+     * Calculates the Cartesian distance between two arrays made up of numeric values.
+     * @param <K> the class extending Number comprising the input arrays
+     * @param a first number array for comparison
+     * @param b second number array for comparison
+     * @return the Cartesian distance between two arrays of numbers
+     */
+    public double cartesianDistance(int[] a, int[] b) {
+        assert(a.length == b.length): "Arrays must be of equal length";
+
+        double distance = 0.0;
+        for(int i = 0; i < a.length; i++) {
+            distance += Math.pow((b[i] - a[i]), 2.0);
+        }
+        return Math.sqrt(distance);
+    }
+
 
     private Bitmap toGrayscale(Bitmap bmpOriginal) {
         int width, height;
