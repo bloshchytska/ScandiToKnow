@@ -24,3 +24,5 @@ Art and Multimedia Project at LMU Munich
 * [android.com/samples/](https://developer.android.com/samples/)
 * [code.tutsplus.com/tutorials/](https://code.tutsplus.com/tutorials/capture-and-crop-an-image-with-the-device-camera--mobile-11458)
 * [towardsdatascience.com/locality-sensitive-hashing](https://towardsdatascience.com/fast-near-duplicate-image-search-using-locality-sensitive-hashing-d4c16058efcb)
+* [gist.github.com/kuFEAR/ImagePHash](https://gist.github.com/kuFEAR/6e20342198d4040e0bb5)
+* [github.com/digitalinteraction/infiauto/DistanceFunctions](https://github.com/digitalinteraction/infiauto/blob/master/src/main/java/com/infiauto/DistanceFunctions.java)
