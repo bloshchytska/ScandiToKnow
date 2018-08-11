@@ -13,6 +13,6 @@
     <color name="colorPrimaryLight2">#d1cbcd</color>
     <color name="colorYellowAccent">#ffd89a</color>
     <color name="colorRedAccent">#be2d2d</color>
-    <color name="colorBackgroundLight">#e3e8ed</color>
+    <color name="colorBackgroundLight">#dce3eb</color>
     <color name="colorBackgroundDark">#12080b</color>
 </resources>
