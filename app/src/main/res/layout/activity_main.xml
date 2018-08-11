@@ -10,55 +10,60 @@
     tools:context=".MainActivity">
 
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
+    <FrameLayout
+        android:id="@+id/camera_preview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="72dp"
-        android:text="@string/start_description_1"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textAppearance="@android:style/TextAppearance.Material.Body2"
-        android:textColor="@color/colorBackgroundDark"
-        android:textSize="22sp"
-        app:fontFamily="@font/slimamif"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:background="@android:color/background_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <SurfaceView
+        android:id="@+id/surfaceView3"
+        android:layout_width="361dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/colorBackgroundLight"
+        android:foreground="@color/colorBackgroundLight"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="259dp"
-        android:layout_height="36dp"
-        android:layout_marginBottom="156dp"
+    <SurfaceView
+        android:id="@+id/surfaceView4"
+        android:layout_width="0dp"
+        android:layout_height="147dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:autoText="false"
-        android:text="@string/start_description_3"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textAppearance="@android:style/TextAppearance.Material.Body2"
-        android:textColor="@color/colorBackgroundDark"
-        android:textSize="22sp"
-        app:fontFamily="@font/slimamif"
-        app:layout_constraintBottom_toTopOf="@+id/btnCamera"
+        android:layout_marginRight="8dp"
+        android:background="@color/colorBackgroundLight"
+        android:foreground="@color/colorBackgroundLight"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1"
-        app:layout_constraintVertical_bias="0.105" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnCamera"
+        android:id="@+id/button_capture"
         style="?attr/buttonStyle"
-        android:layout_width="184dp"
+        android:layout_width="280dp"
         android:layout_height="61dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="40dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:backgroundTint="@color/colorPrimaryButton"
         android:text="@string/start_button_name"
