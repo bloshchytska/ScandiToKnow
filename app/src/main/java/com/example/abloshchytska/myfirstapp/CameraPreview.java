@@ -1,39 +1,24 @@
 package com.example.abloshchytska.myfirstapp;
 
 import java.io.IOException;
-import java.text.Format;
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Rect;
-import android.graphics.drawable.GradientDrawable;
 import android.hardware.Camera;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.util.Log;
-import android.hardware.camera2.*;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.hardware.Camera.Size;
+
 import static android.content.ContentValues.TAG;
 
 
-import android.app.Activity;
-import android.content.Context;
-import android.hardware.Camera.Size;
-import android.os.Bundle;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.view.Window;
-
-import java.io.IOException;
-import java.util.List;
-
-
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
+
+    private static final int IMAGE_SIZE = 1024;
+
     private SurfaceHolder mHolder;
     private Camera mCamera;
-    private Camera.AutoFocusCallback autoFocusCallback;
 
     public CameraPreview(Context context, Camera camera) {
         super(context);
@@ -52,10 +37,9 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         // The Surface has been created, now tell the camera where to draw the preview.
         Log.d("CameraPreview", "surface created");
 
-        Camera.Parameters parameters = mCamera.getParameters();
-        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_INFINITY);
-
         try {
+            Camera.Parameters parameters = mCamera.getParameters();
+            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_INFINITY);
             mCamera.setPreviewDisplay(holder);
             mCamera.setDisplayOrientation(90);
             mCamera.setParameters(parameters);
@@ -120,9 +104,35 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         setFocus(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
 
 
+
         mCamera.setParameters(parameters);
 
         Log.d("CameraPreview", "surface changed");
+
+        Camera.Parameters camParams = mCamera.getParameters();
+        Camera.Size previewSize = camParams.getSupportedPreviewSizes().get(0);
+
+        for (Camera.Size size : camParams.getSupportedPreviewSizes()) {
+            if (size.width >= IMAGE_SIZE && size.height >= IMAGE_SIZE) {
+                previewSize = size;
+                break;
+            }
+        }
+
+        camParams.setPreviewSize(previewSize.width, previewSize.height);
+
+        Camera.Size pictureSize = camParams.getSupportedPictureSizes().get(0);
+
+        for (Camera.Size size : camParams.getSupportedPictureSizes()) {
+            if (size.width == previewSize.width && size.height == previewSize.height) {
+                pictureSize = size;
+                break;
+            }
+        }
+
+        camParams.setPictureSize(pictureSize.width, pictureSize.height);
+
+
 
         if (mHolder.getSurface() == null){
             // preview surface does not exist

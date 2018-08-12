@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/colorPrimaryLight"
+    tools:context=".DisplayComparing">
+
+    <ImageView
+        android:id="@+id/mainImage"
+        android:layout_width="match_parent"
+        android:layout_height="334dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        tools:layout_editor_absoluteX="134dp"
+        tools:layout_editor_absoluteY="106dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="266dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="41dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonYes"
+            style="?attr/buttonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ja"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="283dp" />
+
+        <Button
+            android:id="@+id/buttonNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Nein"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="222dp"
+            tools:layout_editor_absoluteY="282dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="111dp"
+        android:text="Ist das Bild wonach Du suchst?"
+        android:textColor="@color/colorBackgroundDark" />
+
+</RelativeLayout>
