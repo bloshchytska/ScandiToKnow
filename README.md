@@ -6,9 +6,9 @@ Art and Multimedia Project at LMU Munich
 ## Story
 ### Task Flow
 
-1. make a photo of the on of scandinavian illustrations
-2. find a similar image from the existing in the app db
-3. display the result in the form of the found image and the text belonging to it
+1. Make a photo of the one of scandinavian illustrations
+2. Find a similar image from the existing in the app db
+3. Display the result in the form of the found image and the text belonging to it
 
 
 ## Authors
