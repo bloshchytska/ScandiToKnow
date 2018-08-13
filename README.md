@@ -21,8 +21,8 @@ Compare and Identify similar images taken with the camera and show the Scandi-St
 
 ## Authors
 
-* **Polina Panchenkova** - *Project Idea, Story, Illustration, Icon Design, Content* - [instagram](https://www.instagram.com/polina_panchenkova/)
-* **Anastasiia Bloshchytska** - *App Idea, Development, UX/UI Design* - [github](https://github.com/bloshchytska)
+* **Polina Panchenkova** - *Project Idea, Story, Illustration, Logo/Icon/Visual Design, Content* - [instagram](https://www.instagram.com/polina_panchenkova/)
+* **Anastasiia Bloshchytska** - *App Idea, Development, UX/UI/Visual Design* - [github](https://github.com/bloshchytska)
 
 
 ## Built With
