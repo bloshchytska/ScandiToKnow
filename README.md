@@ -4,7 +4,15 @@
 Art and Multimedia Project at LMU Munich
 
 ## Story
-### Task Flow
+
+### Goal
+Compare and Identify similar images taken with the camera. Show the Scandi-Story at the End, that belong to the image.
+
+### Methods
+1. Image Hashing, ImagePHash
+2. CartesianDistance
+
+### Flow
 
 1. Make a photo of the one of scandinavian illustrations
 2. Find a similar image from the existing in the app db
