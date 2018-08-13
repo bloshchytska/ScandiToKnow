@@ -1,5 +1,16 @@
+<img src="https://github.com/bloshchytska/ScandiToKnow/raw/master/app/src/main/res/drawable/ic_launcher_scandi.png" width="100" height="100"/>
+
 # ScandiToKnow
 Art and Multimedia Project at LMU Munich
+___
+
+## Story
+### Task Flow
+
+1. make a photo of the on of scandinavian illustrations
+2. find a similar image from the existing in the app db
+3. display the result in the form of the found image and the text belonging to it
+
 
 ## Authors
 
