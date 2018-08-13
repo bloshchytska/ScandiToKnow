@@ -6,11 +6,11 @@ Art and Multimedia Project at LMU Munich
 ## Story
 
 ### Goal
-Compare and Identify similar images taken with the camera. Show the Scandi-Story at the End, that belong to the image.
+Compare and Identify similar images taken with the camera and show the Scandi-Story at the End, that belong to the image
 
-### Methods
+### Used Methods
 1. Image Hashing, ImagePHash
-2. CartesianDistance
+2. Hamming and Cartesian Distance
 
 ### Flow
 
