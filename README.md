@@ -9,14 +9,14 @@ Art and Multimedia Project at LMU Munich
 Compare and Identify similar images taken with the camera and show the Scandi-Story at the End, that belong to the image
 
 ### Used Methods
-1. Image Hashing, ImagePHash
-2. Hamming and Cartesian Distance
+* Image Hashing, ImagePHash
+* Hamming and Cartesian Distance
 
 ### Flow
 
 1. Make a photo of the one of scandinavian illustrations
 2. Find a similar image from the existing in the app db
-3. Display the result in the form of the found image and the text belonging to it
+3. Display the result in the form of the found image and the relevant text
 
 
 ## Authors
