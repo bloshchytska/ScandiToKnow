@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Rect;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,8 +18,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static android.content.ContentValues.TAG;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
@@ -34,7 +38,11 @@ public class StartCamera extends AppCompatActivity {
     private Button btnCaptureImage;
     private Intent intentToComparingView;
     private RelativeLayout overlay;
-    public static Bitmap imageFromCamera = null;
+
+
+    public static Bitmap imageFromCamera;
+    public static List<Bitmap> imagesForComparing = new ArrayList<>();
+
 
 
     @Override
@@ -42,17 +50,11 @@ public class StartCamera extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
-        // Create an instance of Camera
-        mCamera = getCameraInstance();
-
-        // Create our Preview view and set it as the content of our activity.
-        mPreview = new CameraPreview(this, mCamera);
-        preview = findViewById(R.id.camera_preview);
-        preview.addView(mPreview);
-
         overlay = (RelativeLayout) findViewById(R.id.overlay);
 
         btnCaptureImage = findViewById(R.id.button_capture);
+        btnCaptureImage.setVisibility(View.VISIBLE);
+
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,9 +66,29 @@ public class StartCamera extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "start camera");
+        // Create an instance of Camera
+        mCamera = getCameraInstance();
+
+        // Create our Preview view and set it as the content of our activity.
+        mPreview = new CameraPreview(this, mCamera);
+        preview = findViewById(R.id.camera_preview);
+        preview.addView(mPreview);
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mCamera.release();
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Log.d(TAG, "back");
+        mCamera.release();
         mCamera.stopPreview();
     }
 
@@ -88,8 +110,9 @@ public class StartCamera extends AppCompatActivity {
         try {
             c = android.hardware.Camera.open();
         }
-        catch (Exception e){
+        catch (Exception e) {
             // Camera is not available (in use or does not exist)
+            Log.d(TAG, e.getMessage() + " - camera error");
         }
         // returns null if camera is unavailable
         return c;
@@ -101,11 +124,17 @@ public class StartCamera extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mCamera.stopPreview();
+    }
 
     private void transferImageFromCamera(byte[] data) {
         try
         {
-            imageFromCamera = processImage(data);
+            imageFromCamera = processImage(data, true, null);
+            processImagesForComparing();
             startActivity(intentToComparingView);
 
         } catch (IOException e) {
@@ -113,8 +142,22 @@ public class StartCamera extends AppCompatActivity {
         }
     }
 
+    /**
+     * process Images from the app storage
+     */
+    private void processImagesForComparing() {
+        try {
+            imagesForComparing.add(processImage(null, false, getAssets().open("test_stories/img1.jpg")));
+            imagesForComparing.add(processImage(null, false, getAssets().open("test_stories/img2.jpg")));
+            imagesForComparing.add(processImage(null, false, getAssets().open("test_stories/img3.jpg")));
+            imagesForComparing.add(processImage(null, false, getAssets().open("test_stories/img4.jpg")));
+        } catch (IOException e) {
+            Log.d(TAG, "Error process image: " + e.getMessage());
+        }
+    }
 
-    private Bitmap processImage(byte[] data) throws IOException {
+
+    private Bitmap processImage(byte[] data, boolean isByteArray, InputStream inputStream) throws IOException {
         // Determine the width/height of the image
         int width = mCamera.getParameters().getPictureSize().width;
         int height = mCamera.getParameters().getPictureSize().height;
@@ -122,7 +165,14 @@ public class StartCamera extends AppCompatActivity {
         // Load the bitmap from the byte array
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
+
+        Bitmap bitmap;
+
+        if (isByteArray) {
+            bitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
+        } else {
+            bitmap = BitmapFactory.decodeStream(inputStream, new Rect(), options);
+        }
 
         // Rotate and crop the image into a square
         int croppedWidth = (width > height) ? height : width;
@@ -145,6 +195,8 @@ public class StartCamera extends AppCompatActivity {
     private android.hardware.Camera.PictureCallback mPicture = new android.hardware.Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, android.hardware.Camera camera) {
+
+            btnCaptureImage.setVisibility(View.GONE);
 
             File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
 

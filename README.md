@@ -6,26 +6,24 @@ Art and Multimedia Project at LMU Munich
 ## Story
 
 ### Goal
-Compare and Identify similar images taken with the camera and show the Scandi-Story at the End, that belong to the image
+Compare and identify similar images taken with the camera and show the Scandi-Story at the end, that corresponds to the image using image comparison algorithm.
 
-### Used Methods
-* Image Hashing, ImagePHash
-* Hamming and Cartesian Distance
+### Methods used
+* Image hashing, ImagePHash
+* Hamming and Cartesian distance
 
 ### Flow
 
-1. Make a photo of the one of scandinavian illustrations
+1. Take a photo of one of scandinavian gods
 2. Find a similar image from the existing in the app db
-3. Display the result in the form of the found image and the relevant text
-
+3. Display the result in the form of the image found and the text describing it
 
 ## Authors
 
-* **Polina Panchenkova** - *Project Idea, Story, Illustration, Logo/Icon/Visual Design, Content* - [instagram](https://www.instagram.com/polina_panchenkova/)
-* **Anastasiia Bloshchytska** - *App Idea, Development, UX/UI/Visual Design* - [github](https://github.com/bloshchytska)
+* **Polina Panchenkova** - *Project idea, story, illustration, icon and visual design, content* - [instagram](https://www.instagram.com/polina_panchenkova/)
+* **Anastasiia Bloshchytska** - *App idea, software development, UX/UI and visual design* - [github](https://github.com/bloshchytska)
 
-
-## Built With
+## Tools used
 
 * [Android Studio 3.1.4](https://developer.android.com/)
 
@@ -34,7 +32,7 @@ Compare and Identify similar images taken with the camera and show the Scandi-St
 * All artworks (illustrations) are licensed under the [Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 License](https://creativecommons.org/licenses/by-nc-nd/3.0/)
 * The project code is licensed under the [MIT License](https://opensource.org/licenses/MIT)
 
-## Acknowledgments
+## Links
 
 * [android.com/samples/](https://developer.android.com/samples/)
 * [code.tutsplus.com/tutorials/image-crop](https://code.tutsplus.com/tutorials/capture-and-crop-an-image-with-the-device-camera--mobile-11458)

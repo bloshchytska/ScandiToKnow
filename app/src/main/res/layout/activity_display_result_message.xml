@@ -39,41 +39,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageResultView" />
 
-    <TextView
-        android:id="@+id/textViewError"
-        android:layout_width="248dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginRight="28dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="18dp"
-        android:text="@string/error_for_image"
-        android:textColor="@color/colorRedAccent"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageResultView" />
-
-    <Button
-        android:id="@+id/btnCrop"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="28dp"
-        android:layout_marginRight="28dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/colorYellowAccent"
-        android:baselineAligned="false"
-        android:text="@string/crop_button_name"
-        android:textColor="@color/colorPrimaryLight"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewError"
-        app:layout_constraintVertical_bias="0.95" />
 </android.support.constraint.ConstraintLayout>
