@@ -2,7 +2,6 @@
 
 # ScandiToKnow
 Art and Multimedia Project at LMU Munich
-___
 
 ## Story
 ### Task Flow
