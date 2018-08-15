@@ -13,18 +13,20 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/mainImage"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="227dp"
-        android:text="aufgenommenes Bild" />
+        android:layout_marginTop="10dp"
+        android:text="aufgenommenes Bild"
+        android:textColor="@color/colorPrimaryDarkPurple"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/mainImage"
-        android:layout_width="173dp"
-        android:layout_height="184dp"
+        android:layout_width="115dp"
+        android:layout_height="115dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="21dp"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         tools:layout_editor_absoluteX="134dp"
@@ -32,11 +34,9 @@
 
     <ImageView
         android:id="@+id/compareToImage"
-        android:layout_width="115dp"
-        android:layout_height="118dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="126dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_centerInParent="true"
         app:srcCompat="@android:color/transparent" />
 
     <LinearLayout
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="21dp"
+        android:layout_marginBottom="36dp"
         android:orientation="horizontal">
 
         <Button
@@ -53,31 +53,41 @@
             style="?attr/buttonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
+            android:background="@color/colorYesButton"
             android:text="Ja"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textColor="@android:color/white"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="55dp"
-            tools:layout_editor_absoluteY="283dp" />
+            tools:layout_editor_absoluteY="283dp"
+            tools:text="Ja" />
 
         <Button
             android:id="@+id/buttonNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_weight="1"
+            android:background="@color/colorNoButton"
             android:text="Nein"
+            android:textColor="@android:color/white"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="222dp"
-            tools:layout_editor_absoluteY="282dp" />
+            tools:layout_editor_absoluteY="282dp"
+            tools:text="Nein" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/compareToImage"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="88dp"
-        android:text="Ist das Bild wonach Du suchst?"
-        android:textColor="@color/colorBackgroundDark" />
+        android:layout_marginTop="10dp"
+        android:text="ist das Bild wonach Du suchst?"
+        android:textColor="@color/colorPrimaryDarkPurple"
+        android:textStyle="bold" />
 
 </RelativeLayout>

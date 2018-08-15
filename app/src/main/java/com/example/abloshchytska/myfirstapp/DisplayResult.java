@@ -20,7 +20,9 @@ public class DisplayResult extends AppCompatActivity {
         setContentView(R.layout.activity_display_result_message);
 
         if (DisplayComparing.resultScandiImage != null) {
+
             ScandiImage scandiImage = DisplayComparing.resultScandiImage;
+
             ImageView imageView = findViewById(R.id.imageResultView);
             TextView textView = findViewById(R.id.textResultView);
 
@@ -30,34 +32,17 @@ public class DisplayResult extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == Activity.RESULT_OK) {
-
-        } else if (resultCode == Activity.RESULT_CANCELED) {
-            // TODO: error messange
-        }
+    protected void onStop() {
+        super.onStop();
+        Log.d("STOP", "stop - view result");
     }
-
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Log.d(TAG, "back");
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-    }
-
-
-
-
-
-
-
-    private boolean checkImageInDB(Bitmap bitmap) {
-        return true;
     }
 
 }

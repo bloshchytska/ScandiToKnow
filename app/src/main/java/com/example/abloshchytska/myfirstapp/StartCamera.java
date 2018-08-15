@@ -41,6 +41,7 @@ public class StartCamera extends AppCompatActivity {
 
 
     public static Bitmap imageFromCamera;
+
     public static List<Bitmap> imagesForComparing = new ArrayList<>();
 
 
@@ -55,34 +56,43 @@ public class StartCamera extends AppCompatActivity {
         btnCaptureImage = findViewById(R.id.button_capture);
         btnCaptureImage.setVisibility(View.VISIBLE);
 
+        Log.d(TAG, "start camera");
+        // Create an instance of Camera
+        mCamera = getCameraInstance();
+
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCamera.takePicture(null, null, mPicture);
+            mCamera.takePicture(null, null, mPicture);
+            btnCaptureImage.setVisibility(View.GONE);
             }
         });
+
+        // Create our Preview view and set it as the content of our activity.
+        mPreview = new CameraPreview(this, mCamera);
+
+        preview = findViewById(R.id.camera_preview);
+        preview.addView(mPreview);
 
         intentToComparingView = new Intent(this, DisplayComparing.class);
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "start camera");
+    protected void onRestart() {
+        super.onRestart();
+        mCamera.release();
+        Log.d(TAG, "restart camera");
         // Create an instance of Camera
         mCamera = getCameraInstance();
-
         // Create our Preview view and set it as the content of our activity.
         mPreview = new CameraPreview(this, mCamera);
-        preview = findViewById(R.id.camera_preview);
-        preview.addView(mPreview);
-
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         mCamera.release();
+        imagesForComparing.clear();
     }
 
     @Override
@@ -195,8 +205,6 @@ public class StartCamera extends AppCompatActivity {
     private android.hardware.Camera.PictureCallback mPicture = new android.hardware.Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, android.hardware.Camera camera) {
-
-            btnCaptureImage.setVisibility(View.GONE);
 
             File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
 

@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3b3976</color>
-    <color name="colorPrimaryDark">#1D1B3A</color>
-    <color name="colorPrimaryDarkPurple">#241122</color>
-    <color name="colorPrimaryText">#485B6D</color>
-    <color name="colorPrimaryButton">#7ACC6E</color>
-    <color name="colorPrimaryButtonDark">#2C5426</color>
+    <color name="colorPrimary">#b75f4f</color>
+    <color name="colorPrimaryDark">#ad5e49</color>
+    <color name="colorBackgroundDark">#ad5e49</color>
+    <color name="colorBackgroundLight">#dfdfdf</color>
+    <color name="colorPrimaryButton">#4a6470</color>
+    <color name="colorYesButton">#727051</color>
+    <color name="colorNoButton">#8f423f</color>
+    <color name="colorRedAccent">#ad5e49</color>
+    <color name="colorPrimaryText">#1a3b3d</color>
     <color name="colorAccent">#ddd5a4</color>
     <color name="colorBlue">#287a98</color>
     <color name="colorBlueAccent">#e1ffff</color>
     <color name="colorPrimaryLight">#e2e5ee</color>
     <color name="colorPrimaryLight2">#d1cbcd</color>
     <color name="colorYellowAccent">#ffd89a</color>
-    <color name="colorRedAccent">#be2d2d</color>
-    <color name="colorBackgroundLight">#dce3eb</color>
-    <color name="colorBackgroundDark">#12080b</color>
+    <color name="colorPrimaryDarkPurple">#241122</color>
 
     <color name="black_overlay">#66000000</color>
 </resources>

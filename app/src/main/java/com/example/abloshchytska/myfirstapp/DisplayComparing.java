@@ -26,9 +26,10 @@ public class DisplayComparing extends AppCompatActivity {
 
     private ImageView mainImage, compareToImage;
 
+    private Bitmap mainScandiImage;
+
     private List<Bitmap> imagesForComparing = new ArrayList<>();
     private List<ScandiImage> sortedScandiImages = new ArrayList<>();
-    private Bitmap mainScandiImage;
 
     int showedImageIdToCompare = 0;
 
@@ -79,6 +80,14 @@ public class DisplayComparing extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("STOP", "Stop - comparing");
+        sortedScandiImages.clear();
+        sortedScandiImages.clear();
+    }
+
     private boolean displayNextImageToCompare() {
         if (showedImageIdToCompare <= (sortedScandiImages.size()-1)) {
             resultScandiImage = sortedScandiImages.get(showedImageIdToCompare);
@@ -98,6 +107,13 @@ public class DisplayComparing extends AppCompatActivity {
         startActivity(resultIntent);
     }
 
+    /**
+     * Comparing and Sorting
+     * Fill List  imagesForComparing with values
+     * @param _mainImage
+     * @param _imagesToCompare
+     * @return
+     */
     private List<ScandiImage> startCompare(Bitmap _mainImage, List<Bitmap> _imagesToCompare) {
         ImageHash imageHash = new ImageHash();
         int[] mainImageHash = imageHash.calculateHash(_mainImage);
@@ -105,6 +121,7 @@ public class DisplayComparing extends AppCompatActivity {
         List<ScandiImage> scandiImages = new ArrayList<>();
 
         for (int i = 0; i < _imagesToCompare.size(); i++) {
+
             Bitmap imageToCompare = _imagesToCompare.get(i);
             String story = "blblblblba";
             int[] imageToCompareHash =  imageHash.calculateHash(imageToCompare);
