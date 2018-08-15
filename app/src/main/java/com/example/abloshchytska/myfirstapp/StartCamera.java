@@ -1,5 +1,6 @@
 package com.example.abloshchytska.myfirstapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import java.io.File;
@@ -38,6 +40,7 @@ public class StartCamera extends AppCompatActivity {
     private Button btnCaptureImage;
     private Intent intentToComparingView;
     private RelativeLayout overlay;
+    private ProgressBar spinner;
 
 
     public static Bitmap imageFromCamera;
@@ -52,6 +55,7 @@ public class StartCamera extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
 
         overlay = (RelativeLayout) findViewById(R.id.overlay);
+        spinner = (ProgressBar)findViewById(R.id.progressBar);
 
         btnCaptureImage = findViewById(R.id.button_capture);
         btnCaptureImage.setVisibility(View.VISIBLE);
@@ -60,11 +64,16 @@ public class StartCamera extends AppCompatActivity {
         // Create an instance of Camera
         mCamera = getCameraInstance();
 
+
+        spinner.setVisibility(View.GONE);
+
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             mCamera.takePicture(null, null, mPicture);
             btnCaptureImage.setVisibility(View.GONE);
+                spinner.setVisibility(View.VISIBLE);
+
             }
         });
 
@@ -93,6 +102,8 @@ public class StartCamera extends AppCompatActivity {
         super.onStop();
         mCamera.release();
         imagesForComparing.clear();
+        spinner.setVisibility(View.GONE);
+
     }
 
     @Override
