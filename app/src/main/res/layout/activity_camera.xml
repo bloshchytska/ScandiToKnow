@@ -27,16 +27,6 @@
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimaryLight">
 
-        <Button
-            android:id="@+id/button_capture"
-            android:layout_width="141dp"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/progressBar"
-            android:layout_centerHorizontal="true"
-            android:background="@color/colorPrimaryButton"
-            android:text="@string/start_button_name"
-            android:textColor="@android:color/white" />
-
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleLarge"
@@ -47,6 +37,18 @@
             android:layout_marginBottom="57dp"
             android:progressDrawable="@drawable/circular_progress_bar"
             android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/button_capture"
+            android:layout_width="141dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="81dp"
+            android:background="@color/colorPrimaryButton"
+            android:text="@string/start_button_name"
+            android:textColor="@android:color/white" />
+
     </RelativeLayout>
 
 
