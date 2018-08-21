@@ -1,37 +1,39 @@
 package com.example.abloshchytska.myfirstapp;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.graphics.Rect;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Size;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.example.abloshchytska.myfirstapp.classifier.Recognition;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+import java.util.Iterator;
 
 import static android.content.ContentValues.TAG;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
 public class StartCamera extends AppCompatActivity {
 
-    private static final int IMAGE_SIZE = 1024;
+    private static final int IMAGE_SIZE = 224;
+    // Matches the images used to train the TensorFlow model
+    private static final Size MODEL_IMAGE_SIZE = new Size(224, 224);
     private static final int IMAGE_ORIENTATION = 90;
 
     private android.hardware.Camera mCamera;
@@ -44,6 +46,7 @@ public class StartCamera extends AppCompatActivity {
 
 
     public static Bitmap imageFromCamera;
+    public static String textForImage;
 
 
     @Override
@@ -152,6 +155,7 @@ public class StartCamera extends AppCompatActivity {
         try
         {
             imageFromCamera = processImage(data);
+            recogniseImage();
             startActivity(intentToComparingView);
 
         } catch (IOException e) {
@@ -182,7 +186,7 @@ public class StartCamera extends AppCompatActivity {
         bitmap.recycle();
 
         // Scale down to the output size
-        Bitmap scaledBitmap = Bitmap.createScaledBitmap(cropped, IMAGE_SIZE, IMAGE_SIZE, true);
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(cropped, MODEL_IMAGE_SIZE.getWidth(), MODEL_IMAGE_SIZE.getHeight(), true);
         cropped.recycle();
 
         return scaledBitmap;
@@ -241,6 +245,38 @@ public class StartCamera extends AppCompatActivity {
         }
 
         return mediaFile;
+    }
+
+
+    public void recogniseImage() {
+        final Bitmap bitmap = imageFromCamera;
+
+        final Collection<Recognition> results = MainActivity.sTensorFlowClassifier.doRecognize(bitmap);
+        Log.d(TAG, "Got the following results from Tensorflow: " + results);
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (results == null || results.isEmpty()) {
+                    textForImage = "I don't understand what I see";
+                } else {
+                    StringBuilder sb = new StringBuilder();
+                    Iterator<Recognition> it = results.iterator();
+                    int counter = 0;
+                    while (it.hasNext()) {
+                        Recognition r = it.next();
+                        sb.append(r.getTitle());
+                        counter++;
+                        if (counter < results.size() - 1 ) {
+                            sb.append(", ");
+                        } else if (counter == results.size() - 1) {
+                            sb.append(" or ");
+                        }
+                    }
+                    textForImage = sb.toString();
+                }
+            }
+        });
     }
 
 }

@@ -1,11 +1,8 @@
 package com.example.abloshchytska.myfirstapp;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Size;
 import android.view.View;
 import android.view.WindowManager;
@@ -15,7 +12,7 @@ import com.example.abloshchytska.myfirstapp.classifier.TensorFlowImageClassifier
 
 import java.io.IOException;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     // Used to load the 'native-lib' library on application startup.
     static {
@@ -28,9 +25,6 @@ public class MainActivity extends Activity {
     private static final Size MODEL_IMAGE_SIZE = new Size(224, 224);
 
     private Button btnStartCamera;
-
-    private HandlerThread mBackgroundThread;
-    private Handler mBackgroundHandler;
 
 
     @Override
@@ -47,33 +41,23 @@ public class MainActivity extends Activity {
                 startCamera();
             }
         });
-        //btnStartCamera.setEnabled(false);
 
-        init();
+        btnStartCamera.setEnabled(false);
+
+        initTensorFlow();
 
     }
 
-    private void init() {
-        mBackgroundThread = new HandlerThread("BackgroundThread");
-        mBackgroundThread.start();
-        mBackgroundHandler = new Handler(mBackgroundThread.getLooper());
-        mBackgroundHandler.post(mInitializeOnBackground);
-    }
-
-
-    private Runnable mInitializeOnBackground = new Runnable() {
-        @Override
-        public void run() {
-            try {
-                sTensorFlowClassifier = new TensorFlowImageClassifier(MainActivity.this,
-                        MODEL_IMAGE_SIZE.getWidth(), MODEL_IMAGE_SIZE.getHeight());
-            } catch (IOException e) {
-                throw new IllegalStateException("Cannot initialize TFLite Classifier", e);
-            }
-
-            //btnStartCamera.setEnabled(true);
+    private void initTensorFlow() {
+        try {
+            sTensorFlowClassifier = new TensorFlowImageClassifier(MainActivity.this,
+                    MODEL_IMAGE_SIZE.getWidth(), MODEL_IMAGE_SIZE.getHeight());
+        } catch (IOException e) {
+            throw new IllegalStateException("Cannot initialize TFLite Classifier", e);
         }
-    };
+
+        btnStartCamera.setEnabled(true);
+    }
 
 
     private void startCamera() {
@@ -85,14 +69,6 @@ public class MainActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        try {
-            if (mBackgroundThread != null) mBackgroundThread.quit();
-        } catch (Throwable t) {
-            // close quietly
-        }
-
-        mBackgroundThread = null;
-        mBackgroundHandler = null;
 
         try {
             if (sTensorFlowClassifier != null) sTensorFlowClassifier.destroyClassifier();
