@@ -45,9 +45,6 @@ public class StartCamera extends AppCompatActivity {
 
     public static Bitmap imageFromCamera;
 
-    public static List<Bitmap> imagesForComparing = new ArrayList<>();
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +68,7 @@ public class StartCamera extends AppCompatActivity {
             @Override
             public void onClick(View v) {
             mCamera.takePicture(null, null, mPicture);
+
             btnCaptureImage.setVisibility(View.GONE);
                 spinner.setVisibility(View.VISIBLE);
 
@@ -83,7 +81,7 @@ public class StartCamera extends AppCompatActivity {
         preview = findViewById(R.id.camera_preview);
         preview.addView(mPreview);
 
-        intentToComparingView = new Intent(this, DisplayComparing.class);
+        intentToComparingView = new Intent(this, DisplayResult.class);
     }
 
     @Override
@@ -101,7 +99,6 @@ public class StartCamera extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         mCamera.release();
-        imagesForComparing.clear();
         spinner.setVisibility(View.GONE);
 
     }
@@ -154,8 +151,7 @@ public class StartCamera extends AppCompatActivity {
     private void transferImageFromCamera(byte[] data) {
         try
         {
-            imageFromCamera = processImage(data, true, null);
-            processImagesForComparing();
+            imageFromCamera = processImage(data);
             startActivity(intentToComparingView);
 
         } catch (IOException e) {
@@ -163,22 +159,8 @@ public class StartCamera extends AppCompatActivity {
         }
     }
 
-    /**
-     * process Images from the app storage
-     */
-    private void processImagesForComparing() {
-        try {
-            imagesForComparing.add(processImage(null, false, getAssets().open("test_stories/img1.jpg")));
-            imagesForComparing.add(processImage(null, false, getAssets().open("test_stories/img2.jpg")));
-            imagesForComparing.add(processImage(null, false, getAssets().open("test_stories/img3.jpg")));
-            imagesForComparing.add(processImage(null, false, getAssets().open("test_stories/img4.jpg")));
-        } catch (IOException e) {
-            Log.d(TAG, "Error process image: " + e.getMessage());
-        }
-    }
 
-
-    private Bitmap processImage(byte[] data, boolean isByteArray, InputStream inputStream) throws IOException {
+    private Bitmap processImage(byte[] data) throws IOException {
         // Determine the width/height of the image
         int width = mCamera.getParameters().getPictureSize().width;
         int height = mCamera.getParameters().getPictureSize().height;
@@ -188,12 +170,7 @@ public class StartCamera extends AppCompatActivity {
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
 
         Bitmap bitmap;
-
-        if (isByteArray) {
-            bitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
-        } else {
-            bitmap = BitmapFactory.decodeStream(inputStream, new Rect(), options);
-        }
+        bitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
 
         // Rotate and crop the image into a square
         int croppedWidth = (width > height) ? height : width;
@@ -210,7 +187,6 @@ public class StartCamera extends AppCompatActivity {
 
         return scaledBitmap;
     }
-
 
 
     private android.hardware.Camera.PictureCallback mPicture = new android.hardware.Camera.PictureCallback() {
