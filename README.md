@@ -1,4 +1,8 @@
-<img src="https://github.com/bloshchytska/ScandiToKnow/raw/master/app/src/main/res/drawable/ic_launcher_scandi.png" width="100" height="100"/>
+<div>
+  <img src="https://raw.githubusercontent.com/bloshchytska/ScandiToKnow/master/1.png" width="200"/>
+  <img src="https://raw.githubusercontent.com/bloshchytska/ScandiToKnow/master/2.png" width="200"/>
+  <img src="https://raw.githubusercontent.com/bloshchytska/ScandiToKnow/master/3.png" width="200"/>
+</div>
 
 # ScandiToKnow
 
