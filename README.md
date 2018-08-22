@@ -5,7 +5,8 @@
 </div>
 
 # ScandiToKnow
-language: German
+* App language: German
+* Labels from TensorFlow: English
 
 ### Goal
 To make an image classifier
@@ -14,7 +15,7 @@ To make an image classifier
 ### Methods used
 * Image hashing, ImagePHash
 * Hamming and Cartesian distance
-* (last version) with tensorflow
+* (last version) with TensorFlow
 
 ### Flow
 
