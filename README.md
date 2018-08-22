@@ -5,6 +5,7 @@
 </div>
 
 # ScandiToKnow
+language: German
 
 ### Goal
 To make an image classifier
