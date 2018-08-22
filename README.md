@@ -2,8 +2,6 @@
 
 # ScandiToKnow
 
-## Story
-
 ### Goal
 To make an image classifier
 
