@@ -5,22 +5,22 @@
 </div>
 
 # ScandiToKnow
+This is the first-test version of the ScandiToKnow project, the final is <a href="https://github.com/bloshchytska/ScandiToKnow-TFLite-TensorFlow">here</a>
 * App language: German
 * Labels from TensorFlow: English
 
+
+## Overview
+
+This repo based on the <a href="https://github.com/androidthings/sample-tensorflow-imageclassifier">TensorFlow Lite IoT Image Classifier</a> code
+
 ### Goal
-To make an image classifier
-
-
-### Methods used
-* Image hashing, ImagePHash
-* Hamming and Cartesian distance
-* (last version) with TensorFlow
+To make an image classifier with TensorFlow on Android
 
 ### Flow
 
-1. Take a photo.
-2. Recognise image.
+1. Take a photo like Instagram ImageCropper: CameraPreview and Android FrameView used.
+2. Recognise image with the MobileNet_v1 pre-trained model on the ImageNet ILSVRC2012 dataset.
 3. Display the result in the form of the image found and the text describing it.
 
 ## Authors
@@ -37,7 +37,7 @@ To make an image classifier
 * All artworks (illustrations) are licensed under the [Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 License](https://creativecommons.org/licenses/by-nc-nd/3.0/)
 * The project code is licensed under the [MIT License](https://opensource.org/licenses/MIT)
 
-## Links
+### Links
 
 * [android.com/samples/](https://developer.android.com/samples/)
 * [code.tutsplus.com/tutorials/image-crop](https://code.tutsplus.com/tutorials/capture-and-crop-an-image-with-the-device-camera--mobile-11458)
