@@ -15,7 +15,7 @@ import static android.content.ContentValues.TAG;
 
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
 
-    private static final int IMAGE_SIZE = 1024;
+    private static final int IMAGE_SIZE = 224;
 
     private SurfaceHolder mHolder;
     private Camera mCamera;

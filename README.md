@@ -1,22 +1,23 @@
 <img src="https://github.com/bloshchytska/ScandiToKnow/raw/master/app/src/main/res/drawable/ic_launcher_scandi.png" width="100" height="100"/>
 
 # ScandiToKnow
-Art and Multimedia Project at LMU Munich
 
 ## Story
 
 ### Goal
-Compare and identify similar images taken with the camera and show the Scandi-Story at the end, that corresponds to the image using image comparison algorithm.
+To make an image classifier
+
 
 ### Methods used
 * Image hashing, ImagePHash
 * Hamming and Cartesian distance
+* (last version) with tensorflow
 
 ### Flow
 
-1. Take a photo of one of scandinavian gods
-2. Find a similar image from the existing in the app db
-3. Display the result in the form of the image found and the text describing it
+1. Take a photo.
+2. Recognise image.
+3. Display the result in the form of the image found and the text describing it.
 
 ## Authors
 
@@ -40,5 +41,7 @@ Compare and identify similar images taken with the camera and show the Scandi-St
 * [towardsdatascience.com/locality-sensitive-hashing](https://towardsdatascience.com/fast-near-duplicate-image-search-using-locality-sensitive-hashing-d4c16058efcb)
 * [gist.github.com/kuFEAR/ImagePHash](https://gist.github.com/kuFEAR/6e20342198d4040e0bb5)
 * [github.com/digitalinteraction/infiauto/DistanceFunctions](https://github.com/digitalinteraction/infiauto/blob/master/src/main/java/com/infiauto/DistanceFunctions.java)
+* [github.com/androidthings/sample-tensorflow-imageclassifier](https://github.com/androidthings/sample-tensorflow-imageclassifier)
+
 ### Fonts
 * [Slimamif by DmitriZdorov](https://www.fonts-online.ru/font/Slimamif)

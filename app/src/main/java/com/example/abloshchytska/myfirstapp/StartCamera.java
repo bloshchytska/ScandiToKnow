@@ -1,37 +1,39 @@
 package com.example.abloshchytska.myfirstapp;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.graphics.Rect;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Size;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.example.abloshchytska.myfirstapp.classifier.Recognition;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+import java.util.Iterator;
 
 import static android.content.ContentValues.TAG;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
 public class StartCamera extends AppCompatActivity {
 
-    private static final int IMAGE_SIZE = 1024;
+    private static final int IMAGE_SIZE = 224;
+    // Matches the images used to train the TensorFlow model
+    private static final Size MODEL_IMAGE_SIZE = new Size(224, 224);
     private static final int IMAGE_ORIENTATION = 90;
 
     private android.hardware.Camera mCamera;
@@ -44,9 +46,7 @@ public class StartCamera extends AppCompatActivity {
 
 
     public static Bitmap imageFromCamera;
-
-    public static List<Bitmap> imagesForComparing = new ArrayList<>();
-
+    public static String textForImage;
 
 
     @Override
@@ -71,6 +71,7 @@ public class StartCamera extends AppCompatActivity {
             @Override
             public void onClick(View v) {
             mCamera.takePicture(null, null, mPicture);
+
             btnCaptureImage.setVisibility(View.GONE);
                 spinner.setVisibility(View.VISIBLE);
 
@@ -83,7 +84,7 @@ public class StartCamera extends AppCompatActivity {
         preview = findViewById(R.id.camera_preview);
         preview.addView(mPreview);
 
-        intentToComparingView = new Intent(this, DisplayComparing.class);
+        intentToComparingView = new Intent(this, DisplayResult.class);
     }
 
     @Override
@@ -101,7 +102,6 @@ public class StartCamera extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         mCamera.release();
-        imagesForComparing.clear();
         spinner.setVisibility(View.GONE);
 
     }
@@ -154,8 +154,8 @@ public class StartCamera extends AppCompatActivity {
     private void transferImageFromCamera(byte[] data) {
         try
         {
-            imageFromCamera = processImage(data, true, null);
-            processImagesForComparing();
+            imageFromCamera = processImage(data);
+            recogniseImage();
             startActivity(intentToComparingView);
 
         } catch (IOException e) {
@@ -163,22 +163,8 @@ public class StartCamera extends AppCompatActivity {
         }
     }
 
-    /**
-     * process Images from the app storage
-     */
-    private void processImagesForComparing() {
-        try {
-            imagesForComparing.add(processImage(null, false, getAssets().open("test_stories/img1.jpg")));
-            imagesForComparing.add(processImage(null, false, getAssets().open("test_stories/img2.jpg")));
-            imagesForComparing.add(processImage(null, false, getAssets().open("test_stories/img3.jpg")));
-            imagesForComparing.add(processImage(null, false, getAssets().open("test_stories/img4.jpg")));
-        } catch (IOException e) {
-            Log.d(TAG, "Error process image: " + e.getMessage());
-        }
-    }
 
-
-    private Bitmap processImage(byte[] data, boolean isByteArray, InputStream inputStream) throws IOException {
+    private Bitmap processImage(byte[] data) throws IOException {
         // Determine the width/height of the image
         int width = mCamera.getParameters().getPictureSize().width;
         int height = mCamera.getParameters().getPictureSize().height;
@@ -188,12 +174,7 @@ public class StartCamera extends AppCompatActivity {
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
 
         Bitmap bitmap;
-
-        if (isByteArray) {
-            bitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
-        } else {
-            bitmap = BitmapFactory.decodeStream(inputStream, new Rect(), options);
-        }
+        bitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
 
         // Rotate and crop the image into a square
         int croppedWidth = (width > height) ? height : width;
@@ -205,12 +186,11 @@ public class StartCamera extends AppCompatActivity {
         bitmap.recycle();
 
         // Scale down to the output size
-        Bitmap scaledBitmap = Bitmap.createScaledBitmap(cropped, IMAGE_SIZE, IMAGE_SIZE, true);
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(cropped, MODEL_IMAGE_SIZE.getWidth(), MODEL_IMAGE_SIZE.getHeight(), true);
         cropped.recycle();
 
         return scaledBitmap;
     }
-
 
 
     private android.hardware.Camera.PictureCallback mPicture = new android.hardware.Camera.PictureCallback() {
@@ -265,6 +245,38 @@ public class StartCamera extends AppCompatActivity {
         }
 
         return mediaFile;
+    }
+
+
+    public void recogniseImage() {
+        final Bitmap bitmap = imageFromCamera;
+
+        final Collection<Recognition> results = MainActivity.sTensorFlowClassifier.doRecognize(bitmap);
+        Log.d(TAG, "Got the following results from Tensorflow: " + results);
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (results == null || results.isEmpty()) {
+                    textForImage = "I don't understand what I see";
+                } else {
+                    StringBuilder sb = new StringBuilder();
+                    Iterator<Recognition> it = results.iterator();
+                    int counter = 0;
+                    while (it.hasNext()) {
+                        Recognition r = it.next();
+                        sb.append(r.getTitle());
+                        counter++;
+                        if (counter < results.size() - 1 ) {
+                            sb.append(", ");
+                        } else if (counter == results.size() - 1) {
+                            sb.append(" or ");
+                        }
+                    }
+                    textForImage = sb.toString();
+                }
+            }
+        });
     }
 
 }

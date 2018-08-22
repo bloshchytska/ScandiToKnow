@@ -1,6 +1,5 @@
 package com.example.abloshchytska.myfirstapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +8,17 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import static android.content.ContentValues.TAG;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 
 public class DisplayResult extends AppCompatActivity {
+
+    private Bitmap scandiImage;
+    private String scandiText;
+    private ImageView imageView;
+    private TextView textView;
+
+    private AtomicBoolean mReady = new AtomicBoolean(false);
 
 
     @Override
@@ -19,17 +26,19 @@ public class DisplayResult extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_result_message);
 
-        if (DisplayComparing.resultScandiImage != null) {
+        if (StartCamera.imageFromCamera != null) {
 
-            ScandiImage scandiImage = DisplayComparing.resultScandiImage;
+            scandiImage = StartCamera.imageFromCamera;
+            scandiText = StartCamera.textForImage;
 
-            ImageView imageView = findViewById(R.id.imageResultView);
-            TextView textView = findViewById(R.id.textResultView);
+            textView = findViewById(R.id.textResultView);
+            textView.setText(scandiText);
 
-            imageView.setImageBitmap(scandiImage.getViewImage());
-            textView.setText(scandiImage.getStory());
+            imageView = findViewById(R.id.imageResultView);
+            imageView.setImageBitmap(scandiImage);
         }
     }
+
 
     @Override
     protected void onStop() {
@@ -44,5 +53,4 @@ public class DisplayResult extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
 }
